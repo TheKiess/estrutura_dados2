@@ -40,6 +40,7 @@ int main()
       Palavra.dsPalavra = dsPalavraCompleta;
       Palavra.qtContagem++;
 
+      /* objPalavra ou auto para automaticamente */
       for (objPalavra &dsPalavraResposta : arrPalavra)
       {
         if (dsPalavraCompleta == dsPalavraResposta.dsPalavra)
