@@ -2,6 +2,5 @@
     "code-runner.preserveFocus": false,
     "code-runner.runInTerminal": true,
     "code-runner.saveAllFilesBeforeRun": true,
-    "files.autoSave": "onFocusChange",
-    "editor"
+    "files.autoSave": "onFocusChange"
 }
