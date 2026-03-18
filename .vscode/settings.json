@@ -2,5 +2,9 @@
     "code-runner.preserveFocus": false,
     "code-runner.runInTerminal": true,
     "code-runner.saveAllFilesBeforeRun": true,
-    "files.autoSave": "onFocusChange"
+    "files.autoSave": "onFocusChange",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.detectIndentation": true,
+    "editor.renderWhitespace": "all"
 }
