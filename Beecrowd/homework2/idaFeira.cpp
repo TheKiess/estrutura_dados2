@@ -3,48 +3,41 @@
 #include <string>
 #include <iomanip>
 
+using namespace std;
+
 int main()
 {
-  int n;
-  std::cin >> n;
+  int N; cin >> N;
 
-  for (int i = 0; i < n; i++)
+  for (int i = 0; i < N; i++)
   {
-    int m;
-    std::cin >> m;
+    int M; cin >> M;
 
-    std::vector<std::string> produtos(m);
-    std::vector<double> precos(m);
+    vector<string> arrProdutos(M);
+    vector<double> vlPrecos(M);
 
-    for (int j = 0; j < m; j++)
-    {
-      std::cin >> produtos[j] >> precos[j];
-    }
+    for (int j = 0; j < M; j++)
+      cin >> arrProdutos[j] >> vlPrecos[j];
 
-    int p;
-    std::cin >> p;
+    int p; cin >> p;
 
-    double total = 0.0;
+    double vlTotal = 0.0;
 
-    // Ler P produtos que Dona Parcinova deseja comprar
     for (int j = 0; j < p; j++)
     {
-      std::string produto;
-      int quantidade;
-      std::cin >> produto >> quantidade;
+      string dsProduto;
+      int qtProduto;
+      cin >> dsProduto >> qtProduto;
 
-      // Buscar o produto na lista
-      for (int k = 0; k < m; k++)
-      {
-        if (produtos[k] == produto)
+      for (int k = 0; k < M; k++)
+        if (arrProdutos[k] == dsProduto)
         {
-          total += precos[k] * quantidade;
+          vlTotal += vlPrecos[k] * qtProduto;
           break;
         }
-      }
     }
 
-    std::cout << "R$ " << std::fixed << std::setprecision(2) << total << std::endl;
+    cout << "R$ " << fixed << setprecision(2) << vlTotal << endl;
   }
 
   return 0;
