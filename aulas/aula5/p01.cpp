@@ -50,7 +50,6 @@ objPalavra buscarPalavra (string dsPalavra)
 
 int main()
 {
-  vector<objPalavra> arrPalavra;
   char dsChar;
   string dsPalavraCompleta;
   ifstream dsArq("teste.txt");
@@ -63,6 +62,12 @@ int main()
     {
       objPalavra dsPalavraEncontrada = buscarPalavra(dsPalavraCompleta);
       
+      auto nrIndice = hashfn(dsPalavraCompleta);
+
+      for (auto &entry : hashTable[nrIndice])
+        if (entry.dsPalavra == dsPalavraCompleta)
+          entry.qtContagem++;
+
       if (dsPalavraEncontrada.dsPalavra.empty())
       {
         dsPalavraEncontrada.dsPalavra = dsPalavraCompleta;
@@ -77,6 +82,12 @@ int main()
   }
 
   dsArq.close();
+
+  while (true)
+  {
+    /* Fazer a parte do buscar */
+  }
+  
 
   return 0;
 }
