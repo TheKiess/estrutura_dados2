@@ -31,17 +31,18 @@ void inserirPalavra(objPalavra obPalavra)
   hashTable[hashfn(obPalavra.dsPalavra)].push_back(obPalavra);
 }
 
-objPalavra buscarPalavra (string dsPalavra)
+objPalavra buscarPalavra(string dsPalavra, bool idIncrementarContagem = false)
 {
   int nrIndice = hashfn(dsPalavra);
 
-  for (auto it = hashTable[nrIndice].begin(); it != hashTable[nrIndice].end(); it++)
+  for (auto& objPalavra : hashTable[nrIndice])
   {
-    if (it->dsPalavra == dsPalavra)
+    if (objPalavra.dsPalavra == dsPalavra)
     {
-      hashTable[nrIndice].erase(it);
-      it->qtContagem++;
-      return *it;
+      if (idIncrementarContagem)
+        objPalavra.qtContagem++;
+
+      return objPalavra;
     }
   }
 
@@ -52,7 +53,7 @@ int main()
 {
   char dsChar;
   string dsPalavraCompleta;
-  ifstream dsArq("teste.txt");
+  ifstream dsArq("clarissa.txt");
 
   while (dsArq.get(dsChar))
   {
@@ -60,22 +61,15 @@ int main()
       dsPalavraCompleta += tolower(dsChar);
     else if (dsPalavraCompleta.size() > 0)
     {
-      objPalavra dsPalavraEncontrada = buscarPalavra(dsPalavraCompleta);
+      objPalavra dsPalavraEncontrada = buscarPalavra(dsPalavraCompleta, true);
       
       auto nrIndice = hashfn(dsPalavraCompleta);
-
-      for (auto &entry : hashTable[nrIndice])
-        if (entry.dsPalavra == dsPalavraCompleta)
-          entry.qtContagem++;
 
       if (dsPalavraEncontrada.dsPalavra.empty())
       {
         dsPalavraEncontrada.dsPalavra = dsPalavraCompleta;
         inserirPalavra(dsPalavraEncontrada);
       }
-
-
-      cout << dsPalavraEncontrada.dsPalavra << " " << dsPalavraEncontrada.qtContagem << endl;
 
       dsPalavraCompleta.clear();
     }
@@ -85,9 +79,22 @@ int main()
 
   while (true)
   {
-    /* Fazer a parte do buscar */
+    cout << "Digite a palavra a ser buscada (ou '0' para encerrar): "; cin >> dsPalavraCompleta;
+
+    if (dsPalavraCompleta == "0")
+      break;
+
+    objPalavra dsPalavraEncontrada = buscarPalavra(dsPalavraCompleta);
+
+    if (dsPalavraEncontrada.dsPalavra.empty())
+    {
+      cout << "A palavra '" << dsPalavraCompleta << "' não foi encontrada." << endl;
+      continue;
+    }
+
+    cout << "A palavra '"                  << dsPalavraEncontrada.dsPalavra << "' foi encontrada " 
+         << dsPalavraEncontrada.qtContagem << " vezes."                     << endl;
   }
-  
 
   return 0;
 }
