@@ -16,7 +16,7 @@ int main()
   root->right->left->left  = create_node("H");
   root->right->left->right = create_node("I");
 
-  cout << height(root) << endl;
+  //cout << height(root) << endl;
 
-  //show(root);
+  show(root);
 }
