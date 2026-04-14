@@ -17,6 +17,12 @@ int main()
   root->right->left->right = create_node("I");
 
   //cout << height(root) << endl;
+  //show(root);
 
-  show(root);
+  cout << "Pre: "; DFS_pre(root);  cout << endl;
+  cout << "In : "; DFS_in(root);   cout << endl;
+  cout << "Pos: "; DFS_post(root); cout << endl;
+  cout << "BSF: "; BST(root);      cout<< endl;
+
+  return 0;
 }
