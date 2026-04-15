@@ -142,15 +142,46 @@ namespace tree
       BST_insert(root->right, dsValor);
   }
 
-  node* BST_find(node *root, const std::string &dsValor)
+  node *BST_find(node* root, const std::string &dsValor)
   {
-    if (dsValor < root->value)
-      BST_find(root->left, dsValor);
-    else if (dsValor > root->value)
-      BST_find(root->right, dsValor);
-    else if (dsValor == root->value)
+    if(!root || root->value == dsValor)
       return root;
-    else
-      return nullptr;
+
+    if(dsValor < root->value)
+        return BST_find(root->left, dsValor);
+
+    return BST_find(root->right, dsValor);
+  }
+
+  void rotateRight(node *&pai)
+  {
+    node *novoPai  = pai->left;
+    pai->left      = novoPai->right;
+    novoPai->right = pai;
+    pai            = novoPai;
+  }
+
+  void rotateLeft(node *&pai)
+  {
+    node *novoPai = pai->right;
+    pai->right    = novoPai->left;
+    novoPai->left = pai;
+    pai           = novoPai;
+  }
+
+  void rotateLeftRight (node *&pai)
+  {
+    node *filho = pai->left;
+    rotateLeft(filho);
+    pai->left = filho;
+    rotateRight(pai);
+  }
+
+  void rotateRightLeft(node *&pai)
+  {
+    node *filho = pai->right;
+    rotateRight(filho);
+    pai->right = filho;
+    rotateLeft(pai);
   }
 }
