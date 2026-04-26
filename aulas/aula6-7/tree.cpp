@@ -155,6 +155,34 @@ namespace tree
     return BST_find(root->right, dsValor);
   }
 
+  // Percorrer por nível - Feito para estudo.
+  void BFS_nivel(node *root, bool &idPrimeiro)
+  {
+    if (!root)
+      return;
+
+    std::queue<node*> fila;
+    fila.push(root);
+
+    while (!fila.empty())
+    {
+      node *aux = fila.front();
+      fila.pop();
+
+      if(!idPrimeiro)
+        std::cout << " ";
+
+      std::cout << aux->value;
+      idPrimeiro = false;
+
+      if (aux->left != nullptr)
+        fila.push(aux->left);
+
+      if (aux->right != nullptr)
+        fila.push(aux->right);
+    }
+  }
+
   void rotateRight(node *&pai)
   {
     node *novoPai  = pai->left;

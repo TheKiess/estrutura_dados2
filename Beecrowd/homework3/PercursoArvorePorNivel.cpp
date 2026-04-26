@@ -35,49 +35,31 @@ void BST_insert(node *&root, string &dsValor)
   }
 }
 
-void DFS_pre(node *root, bool &idPrimeiro)
+void BFS_nivel(node *root, bool &idPrimeiro)
 {
-  if(!root)
+  if (!root)
     return;
 
-  if(!idPrimeiro)
-    cout << " ";
+  queue<node*> fila;
+  fila.push(root);
 
-  cout << root->value;
-  idPrimeiro = false;
+  while (!fila.empty())
+  {
+    node *aux = fila.front();
+    fila.pop();
 
-  DFS_pre(root->left,  idPrimeiro);
-  DFS_pre(root->right, idPrimeiro);
-}
+    if(!idPrimeiro)
+      cout << " ";
 
-void DFS_in(node *root, bool &idPrimeiro)
-{
-  if(!root) return;
+    cout << aux->value;
+    idPrimeiro = false;
 
-  DFS_in(root->left, idPrimeiro);
+    if (aux->left != nullptr)
+      fila.push(aux->left);
 
-  if(!idPrimeiro)
-    cout << " ";
-
-  cout << root->value;
-  idPrimeiro = false;
-
-  DFS_in(root->right, idPrimeiro);
-}
-
-void DFS_post(node *root, bool &idPrimeiro)
-{
-  if(!root)
-    return;
-
-  DFS_post(root->left,  idPrimeiro);
-  DFS_post(root->right, idPrimeiro);
-
-  if(!idPrimeiro)
-    cout << " ";
-
-  cout << root->value;
-  idPrimeiro = false;
+    if (aux->right != nullptr)
+      fila.push(aux->right);
+  }
 }
 
 int main()
@@ -98,20 +80,7 @@ int main()
 
     cout << "Case " << i + 1 << ":" << endl;
 
-    cout << "Pre.: ";
-    DFS_pre(root, idPrimeiro);
-    cout << endl;
-
-    cout << "In..: ";
-    idPrimeiro = true;
-    DFS_in(root, idPrimeiro);
-    cout << endl;
-
-    cout << "Post: ";
-    idPrimeiro = true;
-    DFS_post(root, idPrimeiro);
-    cout << endl;
-
-    cout << endl;
+    BFS_nivel(root, idPrimeiro);
+    cout << endl << endl;
   }
 }
