@@ -9,9 +9,9 @@ namespace tree
   //struct de cada nodo da árvore
   struct node
   {
-      std::string value; //INFORMAÇÃO
-      node *left;  //FILHO DA ESQUERDA
-      node *right; //FILHO DA DIREITA
+    std::string value; //INFORMAÇÃO
+    node *left;  //FILHO DA ESQUERDA
+    node *right; //FILHO DA DIREITA
   };
 
   node *create_node(const std::string &str_value)
@@ -90,7 +90,9 @@ namespace tree
   //Percorrer em in order
   void DFS_in(node *root)
   {
-    if(!root) return;
+    if(!root)
+      return;
+
     DFS_in(root->left);
     std::cout<< root->value << " ";
     DFS_in(root->right);
@@ -99,12 +101,12 @@ namespace tree
   //Percorrer em post order
   void DFS_post(node *root)
   {
-      if(!root)
-        return;
+    if(!root)
+      return;
 
-      DFS_post(root->left);
-      DFS_post(root->right);
-      std::cout << root->value << " ";
+    DFS_post(root->left);
+    DFS_post(root->right);
+    std::cout << root->value << " ";
   }
 
   void BST(node *root)
@@ -151,6 +153,34 @@ namespace tree
         return BST_find(root->left, dsValor);
 
     return BST_find(root->right, dsValor);
+  }
+
+  // Percorrer por nível - Feito para estudo.
+  void BFS_nivel(node *root, bool &idPrimeiro)
+  {
+    if (!root)
+      return;
+
+    std::queue<node*> fila;
+    fila.push(root);
+
+    while (!fila.empty())
+    {
+      node *aux = fila.front();
+      fila.pop();
+
+      if(!idPrimeiro)
+        std::cout << " ";
+
+      std::cout << aux->value;
+      idPrimeiro = false;
+
+      if (aux->left != nullptr)
+        fila.push(aux->left);
+
+      if (aux->right != nullptr)
+        fila.push(aux->right);
+    }
   }
 
   void rotateRight(node *&pai)
