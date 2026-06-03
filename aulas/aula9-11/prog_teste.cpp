@@ -34,5 +34,12 @@ int main()
        << objGrafico.outdegree("C") << endl
        << objGrafico.degree("C")    << endl;
 
+    //objGrafico.remove_link("A","B");
+    //objGrafico.remove_nodo("B");
+    
+    //objGrafico.DFS_from("E");
+    objGrafico.BFS_from("E");
+    objGrafico.draw();
+
   return 0;
 }
